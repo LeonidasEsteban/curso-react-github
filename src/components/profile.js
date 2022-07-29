@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import props from './profile-data'
 
 const ProfileStyled = styled.div`
   grid-area: profile;
@@ -43,32 +44,33 @@ const ProfileStyled = styled.div`
 `
 
 function Profile() {
+  const { twitter_username, blog, name, login, avatar_url, bio, followers, following, location } = props
   return (
     <ProfileStyled>
-      <img src="" className='avatar' width="278" height="278" alt="" />
-      <p className="name">Leonidas Esteban</p>
-      <p className="username">LeonidasEsteban</p>
+      <img src={avatar_url} className='avatar' width="278" height="278" alt="" />
+      <p className="name">{name}</p>
+      <p className="username">{login}</p>
       <div className="buttons">
         <button>follow</button>
         <button>sponsors</button>
       </div>
       <p className="bio info">
-        hola mundo!
+        {bio}
       </p>
       <p className="follwers info">
-        • 10 <span>followers</span> <span>•</span> 15 <span>following</span>
+        • {followers} <span>followers</span> <span>•</span> {following} <span>following</span>
       </p>
-      <p className="stars info">
+      {/* <p className="stars info">
         • 81
-      </p>
+      </p> */}
       <p className="location info">
-        • CDMX
+        • {location}
       </p>
-      <a className="info" href="https://leonidasesteban.com" target="_blank" rel="noreferrer">
-        https://leonidasesteban.com
+      <a className="info" href={blog} target="_blank" rel="noreferrer">
+        {blog}
       </a>
-      <a className="info" href="https://leonidasesteban.com" target="_blank" rel="noreferrer">
-        @LeonidasEsteban
+      <a className="info" href={`https://twitter.com/${twitter_username}`} target="_blank" rel="noreferrer">
+        @{twitter_username}
       </a>
     </ProfileStyled>
   )
