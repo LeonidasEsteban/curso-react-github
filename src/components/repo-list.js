@@ -1,14 +1,17 @@
 import styled from 'styled-components'
+import RepoItem from './repo-item'
 
 const RepoListStyled = styled.div`
   grid-area: repo-list;
   background: pink;
 `
 
-function RepoList() {
+function RepoList({ repoList }) {
   return (
     <RepoListStyled>
-      RepoList
+      {repoList.map((item) => {
+        return <RepoItem {...item} key={item.id} />
+      })}
     </RepoListStyled>
   )
 }
