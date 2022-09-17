@@ -9,10 +9,16 @@ const RepoListStyled = styled.div`
   /* background: pink; */
 `
 
-function RepoList({ repoList }) {
+function RepoList({ repoList, search }) {
+  let list = repoList
+  if (search !== '') {
+    list = list.filter((item) => {
+      return item.name.search(search) >= 0
+    })
+  }
   return (
     <RepoListStyled>
-      {repoList.map((item) => {
+      {list.map((item) => {
         return <RepoItem {...item} key={item.id} />
       })}
     </RepoListStyled>
