@@ -4,43 +4,33 @@ import Overlay from './overlay'
 import styled from 'styled-components'
 import { ButtonContrast } from './components/button'
 import InputText from './components/input-text'
+import ReactDOM from 'react-dom'
 
-class Modal extends React.Component {
+const modalRoot = document.getElementById('portal')
+class ModalPortal extends React.Component {
   constructor(props) {
     super(props)
-    this.name = 'asfsafdasdsadasdsadsa'
+    this.el = document.createElement('div')
   }
-  state = {
-    a: 'Miguel'
-  }
-  componentDidUpdate() {
-    console.log('el componente se actualizó')
-  }
+
   componentWillUnmount() {
-    console.log('el componente está a punto de desaparecer')
+    modalRoot.removeChild(this.el)
+
   }
   componentDidMount() {
-    setTimeout(() => {
-
-      this.setState({
-        a: 'Leo',
-        b: this.name
-      })
-    }, 5000)
-
-    // this.setState({
-    //   b: ''
-    // })
+    modalRoot.appendChild(this.el)
   }
   render() {
-    return (
-      <div style={{ background: 'black' }}>
-        {this.state.a}
-        {this.state.b}
-        ola mundo este es componente bonito, pero hecho con una clase
-      </div>
-    )
+    return ReactDOM.createPortal(this.props.children, this.el)
   }
+}
+
+export default function Modal() {
+  return (
+    <ModalPortal>
+      <ModalContent />
+    </ModalPortal>
+  )
 }
 
 const ModalContentStyled = styled.form`
@@ -80,9 +70,6 @@ function ModalContent() {
   }
   return (
     <Overlay>
-      {
-        isActive ? <Modal /> : null
-      }
       <ModalContentStyled ref={form} action="" onSubmit={handleSubmit}>
         <h2 className='title'>Busca a tu usuario favorito</h2>
         <InputText type="text" autoComplete='off' name="username" placeholder="Username" />
@@ -91,5 +78,3 @@ function ModalContent() {
     </Overlay>
   )
 }
-
-export default ModalContent
