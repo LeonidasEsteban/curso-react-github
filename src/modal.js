@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Overlay from './overlay'
 import styled from 'styled-components'
@@ -63,10 +63,8 @@ function ModalContent({ setModal }) {
   function handleSubmit(event) {
 
     event.preventDefault()
-    console.log({ form })
 
     const formData = new FormData(form.current)
-    console.log(formData.get('username'))
     navigator(`/${formData.get('username')}`)
     setModal(false)
 
